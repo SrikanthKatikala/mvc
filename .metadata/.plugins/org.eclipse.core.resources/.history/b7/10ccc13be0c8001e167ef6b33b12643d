@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" />
+
+<title>Search in lot by Date</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<ul class="navbar-nav mx-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/user/home">Home</a>		
+			</li>
+			<li>
+				<a class="nav-link active" href="/vendors/list">Vendors</a>
+			</li>
+			<li>
+				<a class="nav-link active" href="/materials/list">Materials</a>
+			</li>
+			
+			<li>
+				<a class="nav-link active" href="/plants/list">Plants</a>
+			</li>
+			<li>
+				<a class="nav-link active" href="/lots/list">Inspection Lot</a>
+			</li>
+			
+		</ul>
+	</nav>	
+    
+<h1></h1>
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Search</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/dateBetween" method="get">
+                        <table class="table">
+                            <tr>
+                                <td><label >Start Date: </label></td>
+                                <td><input type="date" class="form-control" name="firstDate" required></td>
+                            </tr>
+                            <tr>
+                                <td><label >End date:</label></td>
+                                <td><input type="date" class="form-control" name="lastDate" required></td>
+                            </tr>
+                            <tr>
+                                <td><label>Message:</label></td>
+                                <td><input class="form-control" name=""></input></td>
+                            </tr>
+                        </table>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

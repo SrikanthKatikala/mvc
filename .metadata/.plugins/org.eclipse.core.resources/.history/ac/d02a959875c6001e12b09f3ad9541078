@@ -1,0 +1,5 @@
+package com.zettamine.mat.search_criteria;
+
+public class LotSearchByDate {
+
+}

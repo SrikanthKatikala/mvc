@@ -1,0 +1,112 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" />
+
+<title>Inspection Lot Form</title>
+</head>
+<body style="background-image: linear-gradient(145deg, gray, white, green); height: 120%;">
+	<div class="container text-center py-5 mt-4 w-25">
+		
+		<c:if test="${lot.lotId==null}">
+		<h2>Add a Inspection Lot</h2>
+		</c:if>
+		<c:if test="${lot.lotId!=null}">
+		<h2>Update a Inspection Lot</h2>
+		</c:if>
+		
+		<f:form action="/lots/add" method="post" modelAttribute="lot">
+			<div class="form-group">
+				
+				<f:hidden class="form-control" path="lotId" name="lotId"/>
+			</div>
+			
+			<div class="form-group mb-2">
+				<label for="materialType">Material Type:</label>
+				<f:select path="material" class="form-control text-center">
+					<c:forEach var="mat" items="${materials}">
+					<f:option value="${mat.materialId}" label="${mat.materialId}"></f:option>
+					</c:forEach>
+				</f:select>
+			</div>
+			
+			
+			<div class="form-group mb-2">
+				<label for="vendor">Vendor :</label>
+				<f:select path="vendor" class="form-control text-center">
+					<c:forEach var="vend" items="${vendors}">
+					<f:option value="${vend.vendorId}" label="${vend.vendorName}"></f:option>
+					</c:forEach>
+				</f:select>
+			</div>
+			<div class="form-group mb-2">
+				<label for="plant">Plant :</label>
+				<f:select path="plant" class="form-control text-center">
+					<c:forEach var="plnt" items="${plants}">
+					<f:option value="${plnt.plantId}" label="${plnt.plantId}"></f:option>
+					</c:forEach>
+				</f:select>
+			</div>
+			
+			<div class="form-group">
+				<label>Created On:</label>
+				<f:input class="form-control text-center" value="${createdOn}"  path="createdOn" type="date"/>
+			</div>
+			
+			<c:if test="${lot.lotId!=null}">
+			<div class="form-group">
+				<label>Start Date:</label>
+				<f:input class="form-control text-center" value="${ispStartDate}" path="ispStartDate" type="date"/>
+			</div>
+			<div class="form-group">
+				<label>End Date:</label>
+				<f:input class="form-control text-center" value="${ispEndDate}"  path="ispEndDate" type="date"/>
+			</div>
+			<div class="form-group">
+				<label>Result:</label>
+				<f:select path="result" class="form-control text-center">
+					<f:option value="select" label="   --------  Select  ------  "></f:option>
+					<f:option value="PASS" label="PASS"></f:option>
+					<f:option value="FAIL" label="FAIL"></f:option>
+				</f:select>
+			</div>
+			<div class="form-group">
+				<label>Remarks:</label>
+				<f:input class="form-control text-center" path="remarks"/>
+			</div>
+			
+			</c:if>
+			<div class="form-group mb-2">
+				<label for="user">User:</label>
+				<f:select path="user" class="form-control text-center">			
+					<c:forEach var="usr" items="${users}">
+					<f:option value="${usr.userId}" label="${usr.userName}"></f:option>
+					</c:forEach>
+				</f:select>
+			</div>
+			<div class="form-group">
+				<f:hidden class="form-control" path="active" name="active"
+					value="active" required="required"></f:hidden>
+			</div>
+			<button type="submit" class="btn btn-primary"> Submit</button>
+		</f:form>
+
+
+		<h2>${msg}</h2>
+	</div>
+	<div class="container mx-auto text-center">
+		<a href="/lots/list"><button type="button"
+				class="btn btn-warning">All Inspection Lots</button></a>
+					<a href="/user/home"><button type="button"
+				class="btn btn-secondary">Home</button></a>
+	</div>
+
+</body>
+
+</html>

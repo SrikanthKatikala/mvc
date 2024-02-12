@@ -1,0 +1,35 @@
+package com.zettamine.mat.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.zettamine.mat.service.InspectionLotServiceImpl;
+import com.zettamine.mat.service.MaterialServiceImpl;
+import com.zettamine.mat.service.PlantServiceImpl;
+import com.zettamine.mat.service.UserServiceImpl;
+import com.zettamine.mat.service.VendorServiceimpl;
+
+@Controller
+@RequestMapping(path="lots")
+public class InspectionLotController {
+
+	private InspectionLotServiceImpl lotService; 	
+	private MaterialServiceImpl matService;
+	private VendorServiceimpl vendorService;
+	private PlantServiceImpl plantService;
+	private UserServiceImpl userService;
+	
+	public InspectionLotController(@Autowired InspectionLotServiceImpl lotService,@Autowired MaterialServiceImpl matService,
+			@Autowired VendorServiceimpl vendorService,@Autowired PlantServiceImpl plantService, @Autowired UserServiceImpl userService) {
+		this.lotService = lotService;
+		this.matService = matService;
+		this.vendorService = vendorService;
+		this.plantService = plantService;
+		this.userService = userService;
+	}
+	
+	
+	
+	
+}

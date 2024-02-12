@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Home Page</title>
+<!-- Bootstrap CSS link -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Your custom CSS styles can be added here -->
+<style>
+body {
+	padding-top: 50px;
+}
+</style>
+</head>
+<body style="background-color:cyan; ">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home</a>
+				
+			</li>
+			<li>
+				<a class="nav-link active" href="/vendors/list">Vendors</a>
+			</li>
+		</ul>
+	</nav>	
+    
+        <div class="container mt-5">
+
+        <h1 class="mb-4">Welcome to the Home Page</h1>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <a href="/vendors/list" class="btn btn-primary btn-lg btn-block mb-3 ">Vendors</a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="/materials/list" class="btn btn-success btn-lg btn-block mb-3">Materials</a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="/plants/list" class="btn btn-warning btn-lg btn-block mb-3">Plants</a>
+            </div>
+            
+            <div class="col-md-4">
+                <a href="/matChars/list" class="btn btn-info btn-lg btn-block mb-3">Material characteristics</a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="/actuals/list" class="btn btn-danger btn-lg btn-block mb-3">Inspection Actuals</a>
+            </div>
+
+            <div class="col-md-4">
+                <a href="/lots/list" class="btn btn-secondary btn-lg btn-block mb-3">Inspection Lot</a>
+            </div>
+
+        </div>
+
+        <!-- Add other sections or content as needed -->
+
+    </div>
+
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js" integrity="sha384-pzjw8b+Xt8Mr2VHP8r+XjsJGrBqI3v3+tuueqOg0xJmRWLGzB/dEi6I2DvFqjWbI" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy/ApNXHweNUy8JkdjIpmNl5SLwZfmU1xj" crossorigin="anonymous"></script>
+
+</body>
+</html>

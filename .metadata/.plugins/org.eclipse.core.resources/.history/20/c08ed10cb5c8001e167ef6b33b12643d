@@ -1,0 +1,93 @@
+<%@page import="java.util.List"%>
+<%@page import="com.zettamine.mat.entity.MaterialCharacteristics"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css" />
+
+<title>Material Characteristics Form</title>
+</head>
+<body style="background-image: linear-gradient(45deg, violet, white, red); height: 650px;">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<ul class="navbar-nav mx-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/user/home">Home</a>		
+			</li>
+			<li>
+				<a class="nav-link active" href="/vendors/list">Vendors</a>
+			</li>
+			<li>
+				<a class="nav-link active" href="/materials/list">Materials</a>
+			</li>
+			
+			<li>
+				<a class="nav-link active" href="/plants/list">Plants</a>
+			</li>
+			<li>
+				<a class="nav-link active" href="/lots/list">Inspection Lot</a>
+			</li>
+			
+		</ul>
+	</nav>	
+    
+	<div class="container text-center pt-5 mt-5 w-25">
+	<h1>${totalChars}</h1>
+		<form action="/materials/addAll" method="post">
+			<c:forEach var="ch" begin="0" end="${totalChars-1}" items="chactr">
+			<div class="form-group">	
+				<input type="hidden" class="form-control" name="characters[${ch}].characterId"/>
+			</div>
+			<div class="form-group">
+				<label for="characterDesc">Character Description:</label>
+				<input class="form-control" name="characters[${ch}].characterDesc" required="required"></input>
+			</div>
+			
+			<div class="form-group mb-2">
+				<label for="materialType">Material Type:</label>
+				<input name="characters[${ch}].material" class="form-control text-center" value="${material.materialId}"/>
+			</div>
+			
+			
+			<div class="form-group mb-2">
+				<label for="lowerTolerance">Lower tolerance:</label>
+				<input class="form-control"  name="characters[${ch}].lowerTolerance"
+					required="required"></input>
+			</div>
+			<div class="form-group mb-2">
+				<label for="toleranceUpperLimit">Upper tolerance:</label>
+				<input class="form-control"  name="characters[${ch}].toleranceUpperLimit"
+					required="required"></input>
+			</div>
+			<div class="form-group mb-2">
+				<label for="unitOfMeasurement">Unit Of Measurements:</label>
+				<input class="form-control" name="characters[${ch}].unitOfMeasurement"
+					required="required"></input>
+			</div>
+			<div class="form-group">
+				<f:hidden class="form-control" path="active" name="active"
+					value="active" required="required"></f:hidden>
+			</div>
+			
+			</c:forEach>
+			<button type="submit" class="btn btn-primary"> Submit</button>
+		</form>
+
+
+		<h2>${msg}</h2>
+	</div>
+	<div class="container mx-auto text-center">
+		<a href="/matChars/list"><button type="button"
+				class="btn btn-warning">All Material Characteristics</button></a>
+					<a href="/user/home"><button type="button"
+				class="btn btn-secondary">Home</button></a>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+package com.zettamine.mat.service;
+
+import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import com.zettamine.mat.entity.InspectionActuals;
+import com.zettamine.mat.entity.InspectionLot;
+import com.zettamine.mat.entity.Material;
+import com.zettamine.mat.entity.MaterialCharacteristics;
+import com.zettamine.mat.repository.InspectionLotRepository;
+
+@Service
+public class InspectionLotServiceImpl implements InspectionLotService {
+
+	private InspectionLotRepository lotRepo;
+	private InspectionActualServiceImpl actualService;
+	
+	
+	public InspectionLotServiceImpl(InspectionActualServiceImpl actualService) {
+		this.actualService = actualService;
+	}
+
+	public InspectionLotServiceImpl(InspectionLotRepository lotRepo) {
+		this.lotRepo = lotRepo;
+	}
+
+	@Override
+	public InspectionLot getInspectionLotById(Integer id) {
+		Optional<InspectionLot> optInspectionLot = lotRepo.findByLotIdAndActive(id,"active");
+		if (optInspectionLot.isPresent()) {
+			InspectionLot inspectionLot = optInspectionLot.get();
+			
+			System.out.println("inside inspect lot service getInspectionLotById");
+			return inspectionLot;
+			
+		}
+		System.out.println("inside inspect lot service getInspectionLotById##@@");
+		return null;
+	}
+
+	@Override
+	public List<InspectionLot> getAllInspectionlot() {
+		List<InspectionLot> activeLots = lotRepo.findAllByActive("active");
+		
+		return activeLots;
+	}
+
+	@Override
+	public boolean saveInspectionLot(InspectionLot inspeLot) {
+		InspectionLot save = lotRepo.save(inspeLot);
+		if (save!=null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateInspectionLot(InspectionLot inspLot, Integer id) {
+		return false;
+	}
+
+	@Override
+	public boolean deleteInspectionLotById(Integer id) {
+		try {
+			Optional<InspectionLot> optional = lotRepo.findById(id);
+			if(optional.isPresent()) {
+				InspectionLot inspectionLot = optional.get();
+				inspectionLot.setActive("inactive");
+				lotRepo.save(inspectionLot);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();			
+		}
+		return false;
+	}
+
+	public List<InspectionLot> getAllInspectionLotsBetween(LocalDate firstDate, LocalDate lastDate){
+		List<InspectionLot> lots = lotRepo.findAllByCreatedOnBetweenAndActive(firstDate, lastDate);
+		return lots;
+	}
+	
+	
+	public InspectionLot generateResult(InspectionLot inspectionLot) {
+		Material material = inspectionLot.getMaterial();
+		
+		List<MaterialCharacteristics> materialCharacteristics = inspectionLot.getMaterial().getMaterialCharacteristics();
+		
+		List<InspectionActuals> inspectionActualsList = actualService.getAllByLotId(inspectionLot);
+		
+		for(int i=0; i<materialCharacteristics.size(); i++) {
+			
+			for(InspectionActuals actuals : inspectionActualsList) {
+				
+				if(materialCharacteristics.get(i).getCharacterId()==actuals.getMatCharId().getCharacterId()) {
+					
+					if(materialCharacteristics.get(i).getToleranceUpperLimit() >= actuals.getMaximumMeasurement() && materialCharacteristics.get(i).getToleranceLowerLimit() <= actuals.getMinimumMeasurement()) {
+						
+						inspectionLot.setResult("PASS");
+						inspectionLot.setRemarks(" No Remarks ");
+						break;
+					}
+					else {
+						inspectionLot.setResult("FAIL");
+						inspectionLot.setRemarks(" No Remarks ");
+						return inspectionLot;
+					}
+					
+				}
+			}
+		}
+
+		return inspectionLot;
+	}
+	
+	
+	@Override
+	public boolean chechInspectionLotExists(Integer id) {
+		return false;
+	}
+
+}

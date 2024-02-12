@@ -1,0 +1,11 @@
+package com.zettamine.mat.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(path="lots")
+public class InspectionLotController {
+
+	
+}
